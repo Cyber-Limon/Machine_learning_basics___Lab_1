@@ -1,1 +1,1 @@
-# Machine_learning_basics___Lab_1
+# Основы машинного обучения | Лабораторная работа 1 | Вариант "wholesale customers"
