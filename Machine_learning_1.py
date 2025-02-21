@@ -177,7 +177,7 @@ def NC(X, metric):
 
 
 for weight in ["uniform", "distance"]:
-    for component in range(1, 8):
+    for component in range(1, len(eigenvalues) + 1):
         pca = PCA(n_components=component)
         X = pca.fit_transform(x_scaled)
 
@@ -191,7 +191,7 @@ for weight in ["uniform", "distance"]:
 
 
 for weight in ["uniform", "distance"]:
-    for component in range(1, 8):
+    for component in range(1, len(eigenvalues) + 1):
         pca = PCA(n_components=component)
         X = pca.fit_transform(x_scaled)
 
@@ -205,7 +205,7 @@ for weight in ["uniform", "distance"]:
 
 
 for metric in ["euclidean", "manhattan"]:
-    for component in range(1, 8):
+    for component in range(1, len(eigenvalues) + 1):
         pca = PCA(n_components=component)
         X = pca.fit_transform(x_scaled)
 
