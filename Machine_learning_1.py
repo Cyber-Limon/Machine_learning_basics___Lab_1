@@ -74,7 +74,7 @@ plt.show()
 # Пункт 2.4
 n_optimal = 0
 
-for i in range(1, len(eigenvalues)):
+for i in range(1, len(eigenvalues) + 1):
     accuracy = sum(eigenvalues[:i]) / sum(eigenvalues) * 100
     print("Количество измерений:", i, "\tПотеря:", 100 - accuracy)
     if accuracy >= 80:
@@ -85,8 +85,8 @@ for i in range(1, len(eigenvalues)):
 
 
 # Пункт 3
-def KNC(X, n, weights, best):
-    knc = KNeighborsClassifier(n_neighbors=n, weights=weights)
+def KNC(X, k, weights, best):
+    knc = KNeighborsClassifier(n_neighbors=k, weights=weights)
     loo = LeaveOneOut()
 
     right, wrong = 0, 0
@@ -108,10 +108,10 @@ def KNC(X, n, weights, best):
     if best[0] < right / (right + wrong):
         best[0] = right / (right + wrong)
         best[1] = end_time - start_time
-        best[2] = n
+        best[2] = k
 
-    if n < 10: print("Количество соседей:", n, " ", end='')
-    else:      print("Количество соседей:", n,  "", end='')
+    if k < 10: print("Количество соседей:", k, " ", end='')
+    else:      print("Количество соседей:", k,  "", end='')
 
     print("| Размерность:", len(X[0]), "| Вес:", weights, "| Правильно:", right,"| Неправильно:", wrong,
           "| Точность:", f'{right / (right + wrong):.16f}', "| Производительность:", end_time - start_time)
@@ -183,8 +183,8 @@ for weight in ["uniform", "distance"]:
 
         best = [0, 0, 0]
 
-        for n in range(1, 100, 2):
-            KNC(X, n, weight, best)
+        for k in range(1, 100, 2):
+            KNC(X, k, weight, best)
 
         print("\n\n", "Точность:", best[0], "Производительность:", best[1], "Количество соседей:", best[2], "\n\n")
 
@@ -212,3 +212,4 @@ for metric in ["euclidean", "manhattan"]:
         NC(X, metric)
 
     print("\n\n")
+
